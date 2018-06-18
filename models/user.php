@@ -40,7 +40,30 @@ class UserModel extends Model{
 		}
 		return;
 	}
+	public function parent(){
+		
+		if(isset($_REQUEST['AssessmentCode'])){
+			$post = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
 
+		    $AssessmentCode = $post['AssessmentCode'];
+
+            $this->query('SELECT student_id FROM student WHERE CODE = :code');
+            $this->bind(':code',$AssessmentCode);
+            $rows = $this->resultSet();
+            $id = 0;
+            foreach ($rows as $key => $value) {
+            	$id = $value['student_id'];
+            }
+
+            if($id != null && $id != 0){
+            	header('Location: '.ROOT_URL.'/assessment/data/'.$id);
+            }
+
+		}
+
+		
+		return;
+	}
 	public function login(){
 		//return;
 		$post = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
@@ -70,8 +93,11 @@ class UserModel extends Model{
 				);
 				header('Location: '.ROOT_URL.'/dashboard/home');
 			}else{
-				//echo 'Incorrect Login';
-				//messages::setMsg('Incorrect Login','error');
+				/*$this->errorInfo_func();
+				echo "\nPDO::errorInfo():\n";
+				print_r($this->dbh->errorInfo());
+				print_r($this->stmt->errorInfo());
+				echo "yeah";*/
 			}
 
 		}

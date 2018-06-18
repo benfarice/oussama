@@ -68,7 +68,7 @@ $(window).on("load", function(){
 
     // Chart Data
     var chartData = {
-        labels: myLabelsArray,
+        labels: [],//myLabelsArray,
         
         datasets: [{
 
@@ -87,7 +87,7 @@ $(window).on("load", function(){
             borderWidth: 2,
         },{
             label: "",
-            data: myArray,
+            data: [5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5],
             lineTension: 0,
             fill: false,
             borderColor: "#004a22",
@@ -162,7 +162,7 @@ $(window).on("load", function(){
     };
 
     var chartData2 = {
-        labels: myLabelsArray,
+        labels: mypersonalityArray,
         datasets: [{
             label: "My First dataset",
             backgroundColor: "rgba(75,120,90,.6)",
@@ -172,7 +172,7 @@ $(window).on("load", function(){
             pointBorderWidth: 0,
             pointHoverBorderWidth: 0,
             pointRadius: 0,
-            data: myArray,
+            data:mypersonalityjs ,
         }, {
             label: "My Second dataset",
             backgroundColor: "transparent",
@@ -183,7 +183,7 @@ $(window).on("load", function(){
             pointBorderWidth: 0,
             pointHoverBorderWidth: 0,
             pointRadius: 0,
-            data: myArray,
+            data: [5,5,5,5,5],
         },]
     };
 

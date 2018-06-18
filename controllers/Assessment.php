@@ -33,6 +33,19 @@ class Assessment extends Controller{
 		
 	}
 
+
+	protected function GetStudentsByCamp(){
+		//echo 'home/index';
+		if(isset($_SESSION['is_logged_in'])){
+			$viewmodel = new AssessmentClass();
+			$this->ReturnView($viewmodel->GetStudentsByCamp(),false);
+		}else{
+			header('Location: '.ROOT_URL.'/users/login');
+		}
+		
+	}
+	
+
 	protected function check(){
 		//echo 'home/index';
 		if(isset($_SESSION['is_logged_in'])){
@@ -46,10 +59,24 @@ class Assessment extends Controller{
 
 	protected function data(){
 		//echo 'home/index';
-		if(isset($_SESSION['is_logged_in'])){
+		/*if(isset($_SESSION['is_logged_in'])){
 		
 			$viewmodel = new AssessmentClass();
 			$this->ReturnView($viewmodel->data(),false);
+		}else{
+			header('Location: '.ROOT_URL.'/users/login');
+		}*/
+		$viewmodel = new AssessmentClass();
+		$this->ReturnView($viewmodel->data(),false);
+		
+	}
+
+	protected function parent(){
+		
+		if(isset($_SESSION['is_logged_in'])){
+		
+			$viewmodel = new AssessmentClass();
+			$this->ReturnView($viewmodel->parent(),false);
 		}else{
 			header('Location: '.ROOT_URL.'/users/login');
 		}

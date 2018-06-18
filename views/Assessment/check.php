@@ -54,14 +54,10 @@
                           <label for="eventRegInput1">Student Name</label>
                           <hr>
                           <?php foreach($viewmodel as $item) : ?>
-                          <form action="<?php echo ROOT_URL; ?>/assessment/data"
-                             method="post" id="form-id<?php echo $item['student_id']; ?>" target="_blank">
-                            <input type="hidden" value="<?php echo $item['student_id']; ?>" id="id_s" name="id_s">
-                             <a onclick="document.getElementById('form-id<?php echo $item['student_id']; ?>').submit();" style="font-size: 18px;padding-bottom: 20px;" target="_blank" ><?php echo $item['name']; ?>
-                             
-                             </a>
-                          </form>
                          
+                         <a href="<?php echo ROOT_URL; ?>/assessment/parent/<?php echo $item['student_id']; ?>" target="_blank">
+                           <?php echo $item['name']; ?>
+                         </a>
                           <br><br>
                           <?php endforeach; ?>
 

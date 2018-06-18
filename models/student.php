@@ -20,12 +20,36 @@ class studentClass extends Model{
 		if(isset($post['submit'])){
 			//echo "Submitted";
 			//Insert INTO Mysql
-			$this->query('INSERT INTO student (name, birth_year, Parent_id, class_id, Gender, Parent_name, parent_email, parent_phone, Wechat_ID, Existing_Customer) VALUES ( :name,NULL,:Parent_id,:class_id,:Gender,:Parent_name, :parent_email,:parent_phone,:Wechat_ID,:Existing_Customer)');
+			$o = true;
+			$code_generated = "";
+			do{
+				$r = $this->random_str(12);
+				$this->query('SELECT student_id FROM student WHERE CODE = :code');
+	            $this->bind(':code',$r);
+	            $rows = $this->resultSet();
+	            $id = 0;
+	            foreach ($rows as $key => $value) {
+	            	$id = $value['student_id'];
+	            }
+	            if($id != null && $id != 0)
+	            {
+	            	$o = false;
+	            }
+	            $code_generated = $r;
+			}while($o == false);
+			
+
+
+
+
+
+
+			$this->query('INSERT INTO student (name, birth_year, Parent_id, class_id, Gender, Parent_name, parent_email, parent_phone, Wechat_ID, Existing_Customer,code) VALUES ( :name,NULL,:Parent_id,:class_id,:Gender,:Parent_name, :parent_email,:parent_phone,:Wechat_ID,:Existing_Customer,:code)');
 			
 
 			$this->bind(':name',$post['fullname']);
 			$this->bind(':Parent_id',1);
-			$this->bind(':class_id',1);
+			$this->bind(':class_id',$post['camp_id']);
 			if (isset($post['student_gender']) && $post['student_gender']=="female"){
 				$this->bind(':Gender',2);
 			}else{
@@ -35,15 +59,15 @@ class studentClass extends Model{
 			$this->bind(':parent_email',$post['email']);
 			$this->bind(':parent_phone',$post['phone_number']);
 			$this->bind(':Wechat_ID',$post['Wechat']);
-
-			if (isset($post['Existing_Customer']) && $post['Existing_Customer']=="yes"){
+			$this->bind(':code',$code_generated);
+			/*if (isset($post['Existing_Customer']) && $post['Existing_Customer']=="yes"){
 				$this->bind(':Existing_Customer',1);
 			}else{
 				$this->bind(':Existing_Customer',0);
 			}
-
+			*/
 			
-
+			$this->bind(':Existing_Customer',0);
 
 
 			$this->execute();
@@ -65,6 +89,12 @@ class studentClass extends Model{
 
 
 		}
-		return;
+
+
+		$this->query('SELECT Class_id,Class_title FROM class');
+		$rows = $this->resultSet();
+		
+		return $rows;
+		
 	}
 }

@@ -2,10 +2,13 @@
 abstract class Controller{
 	protected $request;
 	protected $action;
+	protected $id;
 
-	public function __construct($action,$request){
+	public function __construct($action,$request,$id){
 		$this->action = $action;
 		$this->request = $request;
+		$this->id =$id;
+		$_SESSION['id_url']= $id;
 	}
 
 	public function executeAction(){

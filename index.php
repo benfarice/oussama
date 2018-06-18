@@ -26,6 +26,9 @@ require('models/student.php');
 require('models/Assessment.php');
 
 
+require ('class/class.phpmailer.php');
+
+
 $bootstrap = new Bootstrap($_GET);
 
 $controller = $bootstrap->createController();

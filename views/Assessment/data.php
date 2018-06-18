@@ -101,7 +101,9 @@
 
                                                             <div class="col-md-6">
 
-                                                                <p style="text-align: right;font-size: 12px;">Last Update:<br> July 31, 2018</p>
+                                                                <p style="text-align: right;font-size: 12px;">Last Update:<br> 
+                                                                <span class="last_update">July 31, 2018</span> 
+                                                            </p>
                                                             </div>
 
                                                             <div>
@@ -334,7 +336,7 @@
                                                                     </div>
                                                                     <div class="col-md-6" style="text-align: right;">
                                                                         <p style="margin-bottom: 2px;;margin-top: 0px;font-size: 12px;">Last Update:</p>
-                                                                        <p style="margin-bottom: 2px;;margin-top: 0px;font-size: 12px;">July 31, 2018</p>
+                                                                        <p style="margin-bottom: 2px;;margin-top: 0px;font-size: 12px;"><span class="last_update">July 31, 2018</span> </p>
                                                                         <p style="margin-bottom: 2px;;margin-top: 0px;font-size: 12px;">Imperial Variance</p>
                                                                         <p style="margin-bottom: 2px;;margin-top: 0px;font-size: 12px;">~31%</p>
                                                                     </div>
@@ -379,6 +381,7 @@
                                 <button type="button" class="btn btn-primary" 
                                 onclick="print_page()" style="position: abosolute;top: 50%;background-color: #275536;border-color: #275536;">
                                         <i class="icon-printer3" style="margin-right: 10px;"></i> Print
+                                        <?php //echo $_SESSION['id_url']; ?>
                                 </button>
 
                             </div>
@@ -412,14 +415,29 @@
         <!-- END ROBUST JS-->
         <!-- BEGIN PAGE LEVEL JS-->
         <script type="text/javascript"> 
-            myLabelsArray =["Sociality","Natural Talent","Skills","Personality"];         
+            var myLabelsArray = ["Sociality",
+            "Natural Talent","Skills","Personality"]; 
+            var mypersonalityArray=["Oppenness to experience","Extraversion","Agreeableness","Conscientiousness","Emotional stability"];        
             var d = <?php echo $viewmodel; ?>;
             console.log(d);
             var myArray = [];
-            for(var i=0;i<d.length;i++){
-                myArray.push(Number(d[i].v));
+            for(var i=0;i<d[0].length;i++){
+                myArray.push(Number(d[0][i].v));
             }
-            console.log(myArray);       
+            var mypersonalityjs = [];
+            for(var i=0;i<d[1].length;i++){
+                mypersonalityjs.push(Number(d[1][i].v));
+            }
+            l = d[2];
+            console.log(l);
+            $(".last_update").html(d[2]);
+            console.log("myArray");
+
+            console.log(myArray); 
+
+            console.log('mypersonalityjs');
+            
+            console.log(mypersonalityjs);      
         </script>
         <!-- BEGIN PAGE LEVEL JS-->
         <script src="<?php echo ROOT_URL; ?>/app-assets/js/scripts/charts/chartjs/line/line.js" type="text/javascript"></script>

@@ -3,6 +3,7 @@
  	private $controller;
  	private $action;
  	private $request;
+ 	private $id;
 
  	public function __construct($request){
  		$this->request = $request;
@@ -18,6 +19,13 @@
  			$this->action = $this->request['action'];
  		}
 
+ 		if($this->request['id'] == ""){
+ 			$this->id = '';
+ 		}else{
+ 			$this->id = $this->request['id'];
+ 			$_SESSION['id_url']= $this->request['id'];
+ 		}
+
  		//echo $this->controller;
  		//echo "<hr>";
  		//echo $this->action;
@@ -30,7 +38,7 @@
  			//Check Extend
  			if(in_array("Controller",$parents)){
  			if(method_exists($this->controller, $this->action)){
- 				return new $this->controller($this->action,$this->request);
+ 				return new $this->controller($this->action,$this->request,$this->id);
  			}else{
  				// Method Does Not Exist
 

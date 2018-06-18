@@ -77,6 +77,19 @@
                           </div>
 
                         </div>
+ 
+
+                        <div class="form-group">
+                          <label>Camp name</label>
+                          <select id="camp" name="camp_id" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Priority" data-original-title="" title="">
+
+                            <?php foreach($viewmodel as $item) : ?>
+                            <option value="<?php echo $item['Class_id']; ?>">
+                              <?php echo $item['Class_title']; ?>
+                            </option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
 
                         <div class="form-group">
 
@@ -104,7 +117,7 @@
                           <label for="eventRegInput3">Wechat ID</label>
                           <input type="text" id="eventRegInput3" class="form-control" placeholder="wechat ID" name="Wechat">
                         </div>
-
+                        <!--
                         <div class="form-group">
                           <label>Existing Customer</label>
                           <div class="input-group">
@@ -120,6 +133,7 @@
                             </label>
                           </div>
                         </div>
+                        -->
                       </div>
 
                       <div class="form-actions center">

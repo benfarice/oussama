@@ -54,13 +54,41 @@
                     </div>
                     <form class="form" action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
                       <div class="form-body">
-
+                        <!--
                         <div class="form-group">
                           <label for="eventRegInput1">Student Name</label>
                           <input type="text" id="eventRegInput1" class="form-control" placeholder="full name" name="id_student">
                         </div>
+                        -->
 
 
+                         <div class="form-group">
+                              <label for="eventRegInput1">Camp name Name</label>
+                              
+                              <select id="camp" name="campname" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Priority" data-original-title="" title="">
+                                  
+                                  <?php foreach($viewmodel as $item) : ?>
+                                  <option value="<?php echo $item['Class_id']; ?>">
+                                      <?php echo $item['Class_title']; ?>
+                                    </option>
+                                    <?php endforeach; ?>
+
+                                </select>
+                          </div>
+
+                        <div class="form-group">
+                          <label for="eventRegInput1">Student Name</label>
+                          <select id="studentname" name="id_student" class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-title="Priority" data-original-title="" title="">
+                              <option value="oussama">Oussama Tamraoui</option>
+                              <option value="youssef">Youssef imzoughene</option>
+                              <option value="john">John Doe</option>
+                              <option value="batman">Batman</option>
+                              <option value="kerkour">Kerkour haha</option>
+                            </select>
+                        </div>
+
+
+ 
 
 
                         <div class="form-group">
@@ -1737,5 +1765,29 @@
         </footer>
 
         <!-- BEGIN VENDOR JS-->
+
+
+        <script type="text/javascript">
+          
+           $("#camp").change(function() {
+            get_students_by_camp();
+            });
+
+          function get_students_by_camp(){
+            var attr = $("#camp").val();
+            var url = "<?php echo ROOT_URL; ?>/Assessment/GetStudentsByCamp";
+            $.ajax({
+            method: "POST",
+            url: url,
+            data: { attr: attr}
+            })
+            .done(function( data ) {
+              $("#studentname").html(data);
+            });
+          }
+          window.onload=function(){
+             get_students_by_camp();
+          }
+        </script>
      
 </body>
